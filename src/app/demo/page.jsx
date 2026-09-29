@@ -6,6 +6,23 @@ import Link from "next/link";
 import materiaisIniciais from "@/materiais.json";
 
 import {
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow,
+} from "@/components/ui/table";
+
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select";
+
+import {
     Card,
     CardContent,
     CardHeader,
@@ -71,8 +88,8 @@ export default function DemoPage() {
     const [materiais, setMateriais] = useState(materiaisIniciais);
 
     const [busca, setBusca] = useState("");
-    const [categoria, setCategoria] = useState("");
-    const [situacaoFiltro, setSituacaoFiltro] = useState("");
+    const [categoria, setCategoria] = useState("todas");
+    const [situacaoFiltro, setSituacaoFiltro] = useState("todas");
 
     const [dialogMovimentacaoAberto, setDialogMovimentacaoAberto] = useState(false);
 
@@ -177,10 +194,10 @@ export default function DemoPage() {
             material.codigo.toLowerCase().includes(termoBusca);
 
         const correspondeCategoria =
-            categoria === "" || material.categoria === categoria;
+            categoria === "todas" || material.categoria === categoria;
 
         const correspondeSituacao =
-            situacaoFiltro === "" || situacao === situacaoFiltro;
+            situacaoFiltro === "todas" || situacao === situacaoFiltro;
 
         return (
             correspondeBusca &&
@@ -191,8 +208,8 @@ export default function DemoPage() {
 
     function limparFiltros() {
         setBusca("");
-        setCategoria("");
-        setSituacaoFiltro("");
+        setCategoria("todas");
+        setSituacaoFiltro("todas");
     }
 
     function cadastrarMaterial(event) {
@@ -592,75 +609,62 @@ export default function DemoPage() {
                                                 Categoria
                                             </Label>
 
-                                            <select
-                                                id="nova-categoria"
-                                                value={novoMaterial.categoria}
-                                                onChange={(event) =>
-                                                    setNovoMaterial({
-                                                        ...novoMaterial,
-                                                        categoria: event.target.value,
-                                                    })
-                                                }
-                                                required
-                                                className="h-10 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm outline-none focus:border-[#D4A72C]"
+                                            <Select
+                                                value={categoria}
+                                                onValueChange={setCategoria}
                                             >
-                                                <option value="">
-                                                    Selecione uma categoria
-                                                </option>
+                                                <SelectTrigger className="w-full">
+                                                    <SelectValue placeholder="Todas as categorias" />
+                                                </SelectTrigger>
 
-                                                <option value="Metais">
-                                                    Metais
-                                                </option>
+                                                <SelectContent>
+                                                    <SelectItem value="todas">
+                                                        Todas as categorias
+                                                    </SelectItem>
 
-                                                <option value="Plásticos">
-                                                    Plásticos
-                                                </option>
+                                                    <SelectItem value="Metais">
+                                                        Metais
+                                                    </SelectItem>
 
-                                                <option value="Químicos">
-                                                    Químicos
-                                                </option>
+                                                    <SelectItem value="Plásticos">
+                                                        Plásticos
+                                                    </SelectItem>
 
-                                                <option value="Embalagens">
-                                                    Embalagens
-                                                </option>
-                                            </select>
+                                                    <SelectItem value="Químicos">
+                                                        Químicos
+                                                    </SelectItem>
+
+                                                    <SelectItem value="Embalagens">
+                                                        Embalagens
+                                                    </SelectItem>
+                                                </SelectContent>
+                                            </Select>
                                         </div>
 
                                         <div className="grid gap-4 sm:grid-cols-2">
 
                                             <div className="grid gap-2">
-                                                <Label htmlFor="nova-unidade">
-                                                    Unidade
-                                                </Label>
+                                                <Label>Unidade</Label>
 
-                                                <select
-                                                    id="nova-unidade"
+                                                <Select
                                                     value={novoMaterial.unidade}
-                                                    onChange={(event) =>
+                                                    onValueChange={(value) =>
                                                         setNovoMaterial({
                                                             ...novoMaterial,
-                                                            unidade: event.target.value,
+                                                            unidade: value,
                                                         })
                                                     }
-                                                    required
-                                                    className="h-10 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm outline-none focus:border-[#D4A72C]"
                                                 >
-                                                    <option value="">
-                                                        Selecione
-                                                    </option>
+                                                    <SelectTrigger className="w-full">
+                                                        <SelectValue placeholder="Selecione" />
+                                                    </SelectTrigger>
 
-                                                    <option value="kg">
-                                                        kg
-                                                    </option>
-
-                                                    <option value="L">
-                                                        L
-                                                    </option>
-
-                                                    <option value="un">
-                                                        un
-                                                    </option>
-                                                </select>
+                                                    <SelectContent>
+                                                        <SelectItem value="kg">kg</SelectItem>
+                                                        <SelectItem value="L">L</SelectItem>
+                                                        <SelectItem value="un">un</SelectItem>
+                                                    </SelectContent>
+                                                </Select>
                                             </div>
 
                                             <div className="grid gap-2">
@@ -759,42 +763,29 @@ export default function DemoPage() {
                                 />
                             </div>
 
-                            <div>
-                                <label
-                                    htmlFor="categoria"
-                                    className="mb-2 block text-sm font-medium text-zinc-700"
-                                >
-                                    Categoria
-                                </label>
+                            <div className="grid gap-2">
+                                <Label>Categoria</Label>
 
-                                <select
-                                    id="categoria"
-                                    value={categoria}
-                                    onChange={(event) =>
-                                        setCategoria(event.target.value)
+                                <Select
+                                    value={novoMaterial.categoria}
+                                    onValueChange={(value) =>
+                                        setNovoMaterial({
+                                            ...novoMaterial,
+                                            categoria: value,
+                                        })
                                     }
-                                    className="h-10 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm outline-none focus:border-[#D4A72C]"
                                 >
-                                    <option value="">
-                                        Todas as categorias
-                                    </option>
+                                    <SelectTrigger className="w-full">
+                                        <SelectValue placeholder="Selecione uma categoria" />
+                                    </SelectTrigger>
 
-                                    <option value="Metais">
-                                        Metais
-                                    </option>
-
-                                    <option value="Plásticos">
-                                        Plásticos
-                                    </option>
-
-                                    <option value="Químicos">
-                                        Químicos
-                                    </option>
-
-                                    <option value="Embalagens">
-                                        Embalagens
-                                    </option>
-                                </select>
+                                    <SelectContent>
+                                        <SelectItem value="Metais">Metais</SelectItem>
+                                        <SelectItem value="Plásticos">Plásticos</SelectItem>
+                                        <SelectItem value="Químicos">Químicos</SelectItem>
+                                        <SelectItem value="Embalagens">Embalagens</SelectItem>
+                                    </SelectContent>
+                                </Select>
                             </div>
 
                             <div>
@@ -805,30 +796,32 @@ export default function DemoPage() {
                                     Situação
                                 </label>
 
-                                <select
-                                    id="situacao"
+                                <Select
                                     value={situacaoFiltro}
-                                    onChange={(event) =>
-                                        setSituacaoFiltro(event.target.value)
-                                    }
-                                    className="h-10 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm outline-none focus:border-[#D4A72C]"
+                                    onValueChange={setSituacaoFiltro}
                                 >
-                                    <option value="">
-                                        Todas as situações
-                                    </option>
+                                    <SelectTrigger className="w-full">
+                                        <SelectValue placeholder="Todas as situações" />
+                                    </SelectTrigger>
 
-                                    <option value="Normal">
-                                        Normal
-                                    </option>
+                                    <SelectContent>
+                                        <SelectItem value="todas">
+                                            Todas as situações
+                                        </SelectItem>
 
-                                    <option value="Estoque baixo">
-                                        Estoque baixo
-                                    </option>
+                                        <SelectItem value="Normal">
+                                            Normal
+                                        </SelectItem>
 
-                                    <option value="Sem estoque">
-                                        Sem estoque
-                                    </option>
-                                </select>
+                                        <SelectItem value="Estoque baixo">
+                                            Estoque baixo
+                                        </SelectItem>
+
+                                        <SelectItem value="Sem estoque">
+                                            Sem estoque
+                                        </SelectItem>
+                                    </SelectContent>
+                                </Select>
                             </div>
 
                             <div className="flex items-end">
@@ -853,85 +846,80 @@ export default function DemoPage() {
                     {/* TABELA */}
 
                     <div className="overflow-x-auto rounded-2xl border border-zinc-200 bg-white shadow-sm">
+                        <Table className="min-w-[900px]">
 
-                        <table className="w-full min-w-[900px]">
+                            <TableHeader className="bg-[#171717]">
+                                <TableRow className="hover:bg-[#171717]">
 
-                            <thead className="bg-[#171717] text-left text-sm text-white">
-
-                                <tr>
-                                    <th className="px-5 py-4">
+                                    <TableHead className="text-white">
                                         Código
-                                    </th>
+                                    </TableHead>
 
-                                    <th className="px-5 py-4">
+                                    <TableHead className="text-white">
                                         Material
-                                    </th>
+                                    </TableHead>
 
-                                    <th className="px-5 py-4">
+                                    <TableHead className="text-white">
                                         Categoria
-                                    </th>
+                                    </TableHead>
 
-                                    <th className="px-5 py-4">
+                                    <TableHead className="text-white">
                                         Unidade
-                                    </th>
+                                    </TableHead>
 
-                                    <th className="px-5 py-4">
+                                    <TableHead className="text-white">
                                         Quantidade
-                                    </th>
+                                    </TableHead>
 
-                                    <th className="px-5 py-4">
+                                    <TableHead className="text-white">
                                         Estoque mínimo
-                                    </th>
+                                    </TableHead>
 
-                                    <th className="px-5 py-4">
+                                    <TableHead className="text-white">
                                         Situação
-                                    </th>
+                                    </TableHead>
 
-                                    <th className="px-5 py-4">
+                                    <TableHead className="text-white">
                                         Ações
-                                    </th>
-                                </tr>
+                                    </TableHead>
 
-                            </thead>
+                                </TableRow>
+                            </TableHeader>
 
-                            <tbody>
+                            <TableBody>
 
                                 {materiaisFiltrados.length > 0 ? (
                                     materiaisFiltrados.map((material) => {
-                                        const situacao =
-                                            calcularSituacao(material);
+                                        const situacao = calcularSituacao(material);
 
                                         return (
-                                            <tr
-                                                key={material.id}
-                                                className="border-b border-zinc-100 transition hover:bg-zinc-50"
-                                            >
+                                            <TableRow key={material.id}>
 
-                                                <td className="px-5 py-4 text-sm font-semibold text-[#171717]">
+                                                <TableCell className="font-semibold text-[#171717]">
                                                     {material.codigo}
-                                                </td>
+                                                </TableCell>
 
-                                                <td className="px-5 py-4 text-sm text-zinc-700">
+                                                <TableCell>
                                                     {material.material}
-                                                </td>
+                                                </TableCell>
 
-                                                <td className="px-5 py-4 text-sm text-zinc-600">
+                                                <TableCell>
                                                     {material.categoria}
-                                                </td>
+                                                </TableCell>
 
-                                                <td className="px-5 py-4 text-sm text-zinc-600">
+                                                <TableCell>
                                                     {material.unidade}
-                                                </td>
+                                                </TableCell>
 
-                                                <td className="px-5 py-4 text-sm text-zinc-600">
+                                                <TableCell>
                                                     {material.quantidade}
-                                                </td>
+                                                </TableCell>
 
-                                                <td className="px-5 py-4 text-sm text-zinc-600">
+                                                <TableCell>
                                                     {material.estoqueMinimo}
-                                                </td>
+                                                </TableCell>
 
-                                                <td className="px-5 py-4">
+                                                <TableCell>
                                                     <span
                                                         className={`rounded-full px-3 py-1 text-xs font-semibold ${corSituacao(
                                                             situacao
@@ -939,9 +927,9 @@ export default function DemoPage() {
                                                     >
                                                         {situacao}
                                                     </span>
-                                                </td>
+                                                </TableCell>
 
-                                                <td className="px-5 py-4">
+                                                <TableCell>
                                                     <Button
                                                         type="button"
                                                         variant="outline"
@@ -950,16 +938,16 @@ export default function DemoPage() {
                                                     >
                                                         Movimentar
                                                     </Button>
-                                                </td>
+                                                </TableCell>
 
-                                            </tr>
+                                            </TableRow>
                                         );
                                     })
                                 ) : (
-                                    <tr>
-                                        <td
-                                            colSpan="8"
-                                            className="px-5 py-12 text-center"
+                                    <TableRow>
+                                        <TableCell
+                                            colSpan={8}
+                                            className="py-12 text-center"
                                         >
                                             <p className="font-semibold text-zinc-700">
                                                 Nenhum material encontrado
@@ -968,14 +956,13 @@ export default function DemoPage() {
                                             <p className="mt-1 text-sm text-zinc-500">
                                                 Tente alterar ou limpar os filtros.
                                             </p>
-                                        </td>
-                                    </tr>
+                                        </TableCell>
+                                    </TableRow>
                                 )}
 
-                            </tbody>
+                            </TableBody>
 
-                        </table>
-
+                        </Table>
                     </div>
 
                     <Dialog
@@ -1030,29 +1017,29 @@ export default function DemoPage() {
                                         <div className="grid gap-5">
 
                                             <div className="grid gap-2">
+                                                <Label>Tipo de movimentação</Label>
 
-                                                <Label htmlFor="tipo-movimentacao">
-                                                    Tipo de movimentação
-                                                </Label>
-
-                                                <select
-                                                    id="tipo-movimentacao"
+                                                <Select
                                                     value={tipoMovimentacao}
-                                                    onChange={(event) => {
-                                                        setTipoMovimentacao(event.target.value);
+                                                    onValueChange={(value) => {
+                                                        setTipoMovimentacao(value);
                                                         setErroMovimentacao("");
                                                     }}
-                                                    className="h-10 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm outline-none focus:border-[#D4A72C]"
                                                 >
-                                                    <option value="entrada">
-                                                        Entrada
-                                                    </option>
+                                                    <SelectTrigger className="w-full">
+                                                        <SelectValue />
+                                                    </SelectTrigger>
 
-                                                    <option value="saida">
-                                                        Saída
-                                                    </option>
-                                                </select>
+                                                    <SelectContent>
+                                                        <SelectItem value="entrada">
+                                                            Entrada
+                                                        </SelectItem>
 
+                                                        <SelectItem value="saida">
+                                                            Saída
+                                                        </SelectItem>
+                                                    </SelectContent>
+                                                </Select>
                                             </div>
 
                                             <div className="grid gap-2">
