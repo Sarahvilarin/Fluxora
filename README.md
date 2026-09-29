@@ -1,36 +1,72 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Fluxora
 
-## Getting Started
+Fluxora é um projeto frontend desenvolvido com Next.js para simular um SaaS de controle de matérias-primas.
 
-First, run the development server:
+O sistema possui duas áreas principais:
+
+- uma home pública para apresentação do produto;
+- uma página de demonstração do sistema.
+
+## Tecnologias
+
+- Next.js
+- JavaScript
+- Tailwind CSS
+- shadcn/ui
+- Recharts
+
+## Funcionalidades
+
+### Home
+
+- apresentação da Fluxora;
+- benefícios e funcionalidades;
+- prévia do dashboard;
+- formulário fictício para captação de leads;
+- navegação para a demonstração.
+
+### Demonstração
+
+- indicadores de estoque;
+- tabela de matérias-primas;
+- busca por nome ou código;
+- filtros por categoria e situação;
+- gráficos de estoque;
+- cadastro de novos materiais;
+- entrada e saída de estoque;
+- atualização automática dos indicadores e gráficos.
+
+## Rotas
+
+```text
+/        Home da Fluxora
+/demo    Demonstração do SaaS
+```
+
+## Como executar
+
+Instale as dependências:
+
+```bash
+npm install
+```
+
+Depois execute:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abra no navegador:
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+```text
+http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Observação
 
-## Learn More
+O projeto é totalmente frontend e utiliza dados fictícios. Não possui backend, banco de dados ou integração com APIs.
 
-To learn more about Next.js, take a look at the following resources:
+## Objetivo
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+O projeto foi desenvolvido para demonstrar uma solução de controle de matérias-primas para indústrias, permitindo acompanhar estoques, identificar materiais em falta e visualizar indicadores de forma simples.
