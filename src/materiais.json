@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "codigo": "MP-001",
+    "material": "Chapa de aço",
+    "categoria": "Metais",
+    "unidade": "kg",
+    "quantidade": 150,
+    "estoqueMinimo": 200
+  },
+  {
+    "id": 2,
+    "codigo": "MP-002",
+    "material": "Bobina de alumínio",
+    "categoria": "Metais",
+    "unidade": "kg",
+    "quantidade": 320,
+    "estoqueMinimo": 250
+  },
+  {
+    "id": 3,
+    "codigo": "MP-003",
+    "material": "Barra de cobre",
+    "categoria": "Metais",
+    "unidade": "kg",
+    "quantidade": 0,
+    "estoqueMinimo": 80
+  },
+  {
+    "id": 4,
+    "codigo": "MP-004",
+    "material": "Resina ABS",
+    "categoria": "Plásticos",
+    "unidade": "kg",
+    "quantidade": 280,
+    "estoqueMinimo": 150
+  },
+  {
+    "id": 5,
+    "codigo": "MP-005",
+    "material": "Polietileno",
+    "categoria": "Plásticos",
+    "unidade": "kg",
+    "quantidade": 90,
+    "estoqueMinimo": 120
+  },
+  {
+    "id": 6,
+    "codigo": "MP-006",
+    "material": "PVC granulado",
+    "categoria": "Plásticos",
+    "unidade": "kg",
+    "quantidade": 220,
+    "estoqueMinimo": 180
+  },
+  {
+    "id": 7,
+    "codigo": "MP-007",
+    "material": "Solvente industrial",
+    "categoria": "Químicos",
+    "unidade": "L",
+    "quantidade": 70,
+    "estoqueMinimo": 50
+  },
+  {
+    "id": 8,
+    "codigo": "MP-008",
+    "material": "Tinta industrial",
+    "categoria": "Químicos",
+    "unidade": "L",
+    "quantidade": 20,
+    "estoqueMinimo": 60
+  },
+  {
+    "id": 9,
+    "codigo": "MP-009",
+    "material": "Desengraxante",
+    "categoria": "Químicos",
+    "unidade": "L",
+    "quantidade": 0,
+    "estoqueMinimo": 30
+  },
+  {
+    "id": 10,
+    "codigo": "MP-010",
+    "material": "Caixa de papelão",
+    "categoria": "Embalagens",
+    "unidade": "un",
+    "quantidade": 500,
+    "estoqueMinimo": 300
+  },
+  {
+    "id": 11,
+    "codigo": "MP-011",
+    "material": "Filme stretch",
+    "categoria": "Embalagens",
+    "unidade": "un",
+    "quantidade": 80,
+    "estoqueMinimo": 100
+  },
+  {
+    "id": 12,
+    "codigo": "MP-012",
+    "material": "Pallet plástico",
+    "categoria": "Embalagens",
+    "unidade": "un",
+    "quantidade": 45,
+    "estoqueMinimo": 30
+  }
+]
